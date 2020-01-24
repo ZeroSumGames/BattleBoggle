@@ -1,4 +1,5 @@
 import React from "react";
+import Power from "./Power"
 
 // class Shop extends React.Component {
   // constructor() { // probably event listeners will be here
@@ -22,6 +23,7 @@ import React from "react";
   }
 }
 
+//made comp dumb
 // const mapStateToProps = state => {
 //   return {};
 // };
