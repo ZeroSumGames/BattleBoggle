@@ -1,12 +1,12 @@
 import React from "react";
 
-class Board extends React.Component {
+class Game extends React.Component {
   // constructor() { // probably event listeners will be here
   //   super(),
   // }
   render() {
     return (
-      <div className="gameBoard">
+      <div className="game">
         <h1 className="title">Battle Boggle!</h1>
         <div className="head">
           <div>{`Round${'#'}`}</div>
@@ -15,6 +15,10 @@ class Board extends React.Component {
             <div classname="player2Score"></div>
           </div>
           <div classname="timer"></div>
+        </div>
+        <div className="body">
+          <Board />
+          <Shoppe />
         </div>
       </div>
     );
