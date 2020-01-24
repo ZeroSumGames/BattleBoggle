@@ -1,5 +1,4 @@
 import React from "react";
-import {connect} from 'react-redux'
 
 class Game extends React.Component {
   // constructor() { // probably event listeners will be here
