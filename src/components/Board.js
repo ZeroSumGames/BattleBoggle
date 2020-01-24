@@ -29,4 +29,4 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleFlower);
+export default connect(mapStateToProps, mapDispatchToProps);
