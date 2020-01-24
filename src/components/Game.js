@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from 'react-redux'
 
 class Game extends React.Component {
   // constructor() { // probably event listeners will be here
@@ -14,7 +15,9 @@ class Game extends React.Component {
             <div classname="player1Score"></div>
             <div classname="player2Score"></div>
           </div>
-          <div classname="timer"></div>
+          <div classname="timer">
+            <Timer />
+          </div>
         </div>
         <div className="body">
           <Board />
@@ -33,4 +36,4 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps);
+export default connect(mapStateToProps, mapDispatchToProps)(Game);
