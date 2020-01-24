@@ -1,12 +1,10 @@
 import React from "react";
 import Power from "./Power"
 
-// class Shop extends React.Component {
-  // constructor() { // probably event listeners will be here
-  //   super(),
-  // }
-  //trying out making the shop dumb.
-  export default function Shop(props) {
+class Shop extends React.Component {
+  constructor() { 
+    super(),
+  }
   render() {
     return (
       <div className="shop">
@@ -23,13 +21,12 @@ import Power from "./Power"
   }
 }
 
-//made comp dumb
-// const mapStateToProps = state => {
-//   return {};
-// };
+const mapStateToProps = state => {
+  return {};
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {};
-// };
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Shop);
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
