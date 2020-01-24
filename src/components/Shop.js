@@ -13,7 +13,7 @@ import Power from "./Power"
         <h3 className="shopTitle"> Ye ol' Shoppe!</h3>
         <div className="powerTiles">
           return (
-          {props.powers.map(flower => (
+          {props.powers.map(power => (
             <Power />
           ))}
         </div>
