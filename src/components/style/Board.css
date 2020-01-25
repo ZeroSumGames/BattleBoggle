@@ -1,7 +1,7 @@
 .board {
   display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 100px 100px 100px 100px;
-  background-color: #fff;
-  color: #444;
+  grid-gap: 8.5px;
+  grid-template-columns: 85px 85px 85px 85px;
+  background-image: radial-gradient( rgb(255, 248, 208),  rgb(235, 209, 139),  rgb(246, 214, 125));
+  margin: 2px;
 }
