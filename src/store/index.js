@@ -7,7 +7,9 @@ import {
 	boardReducer as board,
 	letterReducer as letters,
 	wordReducer as word,
-  powerReducer as powers
+  	powerReducer as powers,
+  	wordScoreReducer as wordScore,
+  	p1ScoreReducer as p1Score
 } from './game'
 
 // combine reducers here
@@ -15,7 +17,9 @@ const reducer = combineReducers({
 	board,
 	letters,
 	word,
-	powers
+	powers,
+	wordScore,
+	p1Score
 })
 
 // include middlewares
