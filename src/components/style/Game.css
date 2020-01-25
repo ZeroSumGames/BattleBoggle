@@ -1,6 +1,5 @@
 .body{
-  width: 500px;
-  height: 500px;
-  display: inline-block;
+  display:flex;
+  justify-content: center;
   text-align: center;
 }
