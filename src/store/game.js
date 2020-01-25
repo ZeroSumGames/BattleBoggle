@@ -3,6 +3,8 @@
 const BUILD_BOARD = "BUILD_BOARD";
 const INITIALIZE_LETTERS = "INITIALIZE_LETTERS";
 
+const USE_POWER = "USE_POWER";
+
 // MAKER FUNCTIONS
 
 // function to make board based off of frequencies in the english language
@@ -50,50 +52,50 @@ const initialState = {
     Z: { id: 25, value: "Z", points: 10 }
   },
   board: {},
-  powerups: {
-    1: {
+  powers: [
+    {
       id: 1,
       name: "smokeScreen",
       price: 100,
       used: 0,
       img: "./smokeScreen.png"
     },
-    2: {
+    {
       id: 2,
       name: "smokeScreen",
       price: 100,
       used: 0,
-      img: "./smokeScreen.png"
+      img: "./smokeScreen.png" // switch
     },
-    3: {
+    {
       id: 3,
       name: "smokeScreen",
       price: 100,
       used: 0,
       img: "./smokeScreen.png"
     },
-    4: {
+    {
       id: 4,
       name: "smokeScreen",
       price: 100,
       used: 0,
       img: "./smokeScreen.png"
     },
-    5: {
+    {
       id: 5,
       name: "smokeScreen",
       price: 100,
       used: 0,
       img: "./smokeScreen.png"
     },
-    6: {
+    {
       id: 6,
       name: "smokeScreen",
       price: 100,
       used: 0,
       img: "./smokeScreen.png"
     }
-  }
+  ]
 };
 
 // ACTION CREATORS
@@ -112,6 +114,13 @@ export const setLetters = letters => {
   };
 };
 
+const usePower = power => {
+  return {
+    type: USE_POWER,
+    power
+  };
+};
+
 // REDUCERS
 
 export const letterReducer = (state = initialState.letters, action) => {
@@ -122,6 +131,15 @@ export const boardReducer = (state = initialState.board, action) => {
   switch (action.type) {
     case BUILD_BOARD:
       return action.board;
+    default:
+      return state;
+  }
+};
+
+export const powerReducer = (state = initialState.powers, action) => {
+  switch (action.type) {
+    case USE_POWER:
+      return action.power;
     default:
       return state;
   }

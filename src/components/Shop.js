@@ -1,28 +1,32 @@
 import React from "react";
-import Power from "./Power"
+import { connect } from "react-redux";
+import PowerTile from "./PowerTile";
 
 class Shop extends React.Component {
-  constructor() { 
-    super(),
-  }
+  componentDidMount() {}
+
   render() {
+    let powers = this.props.powers;
+
     return (
       <div className="shop">
         <h3 className="shopTitle"> Ye ol' Shoppe!</h3>
         <div className="powerTiles">
-          return (
-          {props.powers.map(power => (
-            <Power />
-          ))}
+          {powers &&
+            powers.map((power, i) => {
+              return <PowerTile img={power.img} key={i} name={power.name}/>;
+            })}
         </div>
-        )
+        
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    powers: state.powers
+  };
 };
 
 const mapDispatchToProps = dispatch => {
