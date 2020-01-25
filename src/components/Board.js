@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom'
 import {submitWord, clearWordScore, addP1Score, clearWord} from '../store/game'
 
 // import {makeBoard} from '../store/game'
+import "./style/Board.css";
 
 class Board extends React.Component {
 	constructor() {
@@ -68,4 +69,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Board);
-
