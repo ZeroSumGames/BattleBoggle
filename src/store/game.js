@@ -188,21 +188,8 @@ export const addP1Score = score => {
 export const wordReducer = (state = initialState.wordLetters, action, seen = initialState.seen) => {
 	switch(action.type) {
 		case ADD_LETTER:
-			let letter = action.letter.letter
-			let row = action.letter.row
-			let col = action.letter.col
-
-			if(!seen.has(letter)) {
-				// validate via grid
-				if(state.length === 0 || (Math.abs(row - state[state.length - 1].row) <= 1 && Math.abs(col - state[state.length - 1].col) <= 1)){
-					seen.add(letter)
-					return [...state, letter]
-				}
-				else return state
-			}
-			else return state
+			return [...state, action.letter]
 		case CLEAR_WORD:
-			seen.clear()
 			return []
 		default: 
 			return state

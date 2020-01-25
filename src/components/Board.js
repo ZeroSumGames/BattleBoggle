@@ -17,7 +17,8 @@ class Board extends React.Component {
   constructor() {
     super();
     this.state = {
-      mouseIsDown: false
+      mouseIsDown: false,
+      seen: new Set()
     };
   }
 
@@ -32,13 +33,12 @@ class Board extends React.Component {
 
   toggleMouseUp(event) {
     this.setState({ mouseIsDown: !this.state.mouseIsDown });
-    // this.props.checkWord(this.props.wordScore)
+    this.setState({seen: new Set()});
+
 
     this.props.addP1Score(this.props.wordScore);
     this.props.clearWord();
     this.props.clearWordScore();
-
-    console.log("fdsfsdf");
   }
 
   render() {
@@ -59,6 +59,7 @@ class Board extends React.Component {
                 key={i}
                 row={Math.floor(i / 4)}
                 col={i % 4}
+                seen={this.state.seen}
               />
             );
           })}
