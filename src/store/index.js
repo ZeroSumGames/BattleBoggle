@@ -2,12 +2,13 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import {createLogger} from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {boardReducer as board, letterReducer as letters} from './game'
+import {boardReducer as board, letterReducer as letters, powerReducer as powers } from './game'
 
 // combine reducers here
 const reducer = combineReducers({
 	board,
-	letters
+	letters,
+	powers
 })
 
 // include middlewares
@@ -27,3 +28,6 @@ export default store
 // current board
 // dictionary
 // letter score values and probabilities
+//powers
+//times used
+//price

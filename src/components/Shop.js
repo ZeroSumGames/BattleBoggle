@@ -1,35 +1,36 @@
 import React from "react";
-import Power from "./Power"
+import { connect } from "react-redux";
+import PowerTile from "./PowerTile";
 
-// class Shop extends React.Component {
-  // constructor() { // probably event listeners will be here
-  //   super(),
-  // }
-  //trying out making the shop dumb.
-  export default function Shop(props) {
+class Shop extends React.Component {
+  componentDidMount() {}
+
   render() {
+    let powers = this.props.powers;
+
     return (
       <div className="shop">
         <h3 className="shopTitle"> Ye ol' Shoppe!</h3>
         <div className="powerTiles">
-          return (
-          {props.powers.map(flower => (
-            <Power />
-          ))}
+          {powers &&
+            powers.map((power, i) => {
+              return <PowerTile img={power.img} key={i} name={power.name}/>;
+            })}
         </div>
-        )
+        
       </div>
     );
   }
 }
 
-//made comp dumb
-// const mapStateToProps = state => {
-//   return {};
-// };
+const mapStateToProps = state => {
+  return {
+    powers: state.powers
+  };
+};
 
-// const mapDispatchToProps = dispatch => {
-//   return {};
-// };
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Shop);
+export default connect(mapStateToProps, mapDispatchToProps)(Shop);
