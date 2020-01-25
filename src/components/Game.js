@@ -15,24 +15,27 @@ class Game extends React.Component {
 
   componentDidMount() {}
 
-  render() {
-    return (
-      <div className="game">
-        <h1 className="title">Battle Boggle!</h1>
-        <div className="head">
-          <div>{`Round${"#"}`}</div>
-          <div className="playerScore">
-            <div className="player1Score"></div>
-            <div className="player2Score"></div>
+
+	render() {
+		return (
+			  <div className="game">
+          <h1 className="title">Battle Boggle!</h1>
+          <div className="head">
+            <div>{`Round${"#"}`}</div>
+              <div className="playerScore">
+                <div className="player1Score"></div>
+                <div className="player2Score"></div>
+              </div>
+            <div className="timer">
+            </div>
           </div>
-          <div className="timer"></div>
-        </div>
-        <div className="body">
-          <Board />
-        </div>
-        <div className="footer">
+          <div className="body">
+            <Board />
+          </div>
+         <div className="footer">
           <Shop />
         </div>
+
       </div>
     );
   }

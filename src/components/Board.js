@@ -2,21 +2,35 @@ import React from 'react'
 import {connect} from 'react-redux'
 import LetterTile from './LetterTile'
 import {linearize} from '../utilities'
+import ReactDOM from 'react-dom'
 // import {makeBoard} from '../store/game'
 
 class Board extends React.Component {
-	componentDidMount() {
+	constructor() {
+		super()
+		this.state = {
+			mouseIsDown: false
+		}
+	}
 
+
+	componentDidMount() {
+		// ReactDOM.findDOMNode(this).addEventListener('')
+		// this.clicked = this.clicked.bind(this)
+	}
+
+	toggleMouseDown(event) {
+		this.setState({mouseIsDown: !this.state.mouseIsDown})
 	}
 
 	render() {
-		let board = linearize(this.props.board);
+		let board = this.props.board;
 
 		return (
-			<div>
+			<div onMouseDown={(event) => this.toggleMouseDown(event)} onMouseUp={(event) => this.toggleMouseDown(event)}>
 				{board && board.map((letter,i) => {
 					return (
-						<LetterTile letter={letter} key={i}/>
+						<LetterTile mouseIsDown={this.state.mouseIsDown} letter={letter} key={i} row={Math.floor(i/4)} col={i%4}/>
 					)
 				})}
 			</div>

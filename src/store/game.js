@@ -1,9 +1,11 @@
 // ACTION CREATORS
 
-const BUILD_BOARD = "BUILD_BOARD";
-const INITIALIZE_LETTERS = "INITIALIZE_LETTERS";
 
+const BUILD_BOARD = 'BUILD_BOARD'
+const INITIALIZE_LETTERS = 'INITIALIZE_LETTERS'
+const ADD_LETTER = 'ADD_LETTER'
 const USE_POWER = "USE_POWER";
+
 
 // MAKER FUNCTIONS
 
@@ -11,11 +13,15 @@ const USE_POWER = "USE_POWER";
 export function makeBoard(letters) {
   let ret = [];
 
-  for (let i = 0; i < 16; i++) {
-    if (i % 4 === 0) ret.push([]);
-    ret[Math.floor(i / 4)][i % 4] =
-      letters[String.fromCharCode(Math.floor(Math.random() * 26) + 65)];
-  }
+
+	for(let i = 0; i < 16; i++) {
+		ret.push({
+			...letters[String.fromCharCode((Math.floor(Math.random()*26)+65))],
+			row: Math.floor(i/4),
+			col: i%4
+		})
+	}
+
 
   return ret;
 }
@@ -95,8 +101,11 @@ const initialState = {
       used: 0,
       img: "./smokeScreen.png"
     }
-  ]
+  ],
+    	wordLetters: [],
+	seen: new Set()
 };
+
 
 // ACTION CREATORS
 
@@ -121,11 +130,36 @@ const usePower = power => {
   };
 };
 
+export const addLetter = letter => {
+	return {
+		type: ADD_LETTER,
+		letter
+	}
+}
+
 // REDUCERS
+
+// keep track of what letters we've seen under the hood
+
+export const wordReducer = (state = initialState.wordLetters, action, seen = initialState.seen) => {
+	switch(action.type) {
+		case ADD_LETTER:
+			if(!seen.has(action.letter)) {
+				seen.add(action.letter)
+				console.log(seen)
+				return action.letter
+			}
+			else return state
+		default: 
+			return state
+	}
+}
 
 export const letterReducer = (state = initialState.letters, action) => {
   return state;
 };
+
+// export const lastLetter = ()
 
 export const boardReducer = (state = initialState.board, action) => {
   switch (action.type) {
