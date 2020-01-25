@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import LetterTile from "./LetterTile";
-import { linearize } from "../utilities";
 import ReactDOM from "react-dom";
 import {
   submitWord,
