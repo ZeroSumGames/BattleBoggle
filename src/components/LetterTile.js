@@ -33,7 +33,8 @@ class LetterTile extends React.Component {
         {this.props.letter.value} {this.props.letter.points}
       </div>
     );
-  }
+	}
+}
   
 const mapStateToProps = state => {
   return {
