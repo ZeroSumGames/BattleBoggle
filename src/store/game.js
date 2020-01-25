@@ -10,8 +10,11 @@ export function makeBoard(letters) {
 	let ret = [];
 
 	for(let i = 0; i < 16; i++) {
-		if(i%4 === 0) ret.push([]);
-		ret[Math.floor(i/4)][i%4] = letters[String.fromCharCode((Math.floor(Math.random()*26)+65))]
+		ret.push({
+			...letters[String.fromCharCode((Math.floor(Math.random()*26)+65))],
+			row: Math.floor(i/4),
+			col: i%4
+		})
 	}
 
 	return ret
@@ -48,8 +51,10 @@ const initialState = {
 			X: {id: 23, value: 'X', points: 1},
 			Y: {id: 24, value: 'Y', points: 1},
 			Z: {id: 25, value: 'Z', points: 10}},
-	board: {},
-	powerups: []
+	board: [],
+	powerups: [],
+	wordLetters: [],
+	contained: new Set()
 }
 
 // ACTION CREATORS
@@ -73,6 +78,8 @@ export const setLetters = letters => {
 export const letterReducer = (state = initialState.letters, action) => {
 	return state
 }
+
+// export const lastLetter = ()
 
 export const boardReducer = (state = initialState.board, action) => {
 	switch(action.type) {
