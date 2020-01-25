@@ -2,6 +2,7 @@
 
 const BUILD_BOARD = 'BUILD_BOARD'
 const INITIALIZE_LETTERS = 'INITIALIZE_LETTERS'
+const ADD_LETTER = 'ADD_LETTER'
 
 // MAKER FUNCTIONS
 
@@ -54,7 +55,7 @@ const initialState = {
 	board: [],
 	powerups: [],
 	wordLetters: [],
-	contained: new Set()
+	seen: new Set()
 }
 
 // ACTION CREATORS
@@ -73,7 +74,30 @@ export const setLetters = letters => {
 	}
 }
 
+export const addLetter = letter => {
+	return {
+		type: ADD_LETTER,
+		letter
+	}
+}
+
 // REDUCERS
+
+// keep track of what letters we've seen under the hood
+
+export const wordReducer = (state = initialState.wordLetters, action, seen = initialState.seen) => {
+	switch(action.type) {
+		case ADD_LETTER:
+			if(!seen.has(action.letter)) {
+				seen.add(action.letter)
+				console.log(seen)
+				return action.letter
+			}
+			else return state
+		default: 
+			return state
+	}
+}
 
 export const letterReducer = (state = initialState.letters, action) => {
 	return state

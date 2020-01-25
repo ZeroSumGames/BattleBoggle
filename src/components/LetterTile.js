@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {addLetter} from '../store/game'
 
 class LetterTile extends React.Component {
 	constructor() {
@@ -13,11 +14,13 @@ class LetterTile extends React.Component {
 	}
 
 	setMouseDown(event) {
-		console.log(this.props.letter)
+		this.props.addLetter(this.props.letter)
+		// console.log(this.props.word)
 	}
 
 	select(event) {
-		if(this.props.mouseIsDown) console.log(this.props.letter)
+		if(this.props.mouseIsDown) this.props.addLetter(this.props.letter)
+		// console.log(this.props.word)
 	}
 
 	render() {
@@ -37,11 +40,15 @@ class LetterTile extends React.Component {
 }
 
 const mapStateToProps = state => {
-	return {}
+	return {
+		word: state.word
+	}
 }
 
 const mapDispatchToProps = dispatch => {
-	return {}
+	return {
+		addLetter: letter => dispatch(addLetter(letter))
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LetterTile)
