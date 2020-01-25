@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addLetter } from "../store/game";
+import { addLetter, addLetterScore } from "../store/game";
 import "./style/LetterTile.css"
 
 class LetterTile extends React.Component {
@@ -9,17 +9,34 @@ class LetterTile extends React.Component {
     super();
     this.select = this.select.bind(this);
     this.setMouseDown = this.setMouseDown.bind(this);
+    this.checkLetter = this.checkLetter.bind(this);
   }
 
   componentDidMount() {}
 
+  checkLetter(letter) {
+		let row = this.props.row
+		let col = this.props.col
+		let seen = this.props.seen
+		let word = this.props.word
+
+		if(!seen.has(letter)) {
+			// validate via grid
+			if(word.length === 0 || (Math.abs(row - word[word.length - 1].row) <= 1 && Math.abs(col - word[word.length - 1].col) <= 1)){
+				seen.add(letter)
+				this.props.addLetter(letter)
+				this.props.addLetterScore(Number(letter.points))
+			}
+		}
+  }
+
   setMouseDown(event) {
-    this.props.addLetter(this.props.letter);
+    this.checkLetter(this.props.letter);
     // console.log(this.props.word)
   }
 
   select(event) {
-    if (this.props.mouseIsDown) this.props.addLetter(this.props.letter);
+    if (this.props.mouseIsDown) this.checkLetter(this.props.letter);
     // console.log(this.props.word)
   }
 
@@ -44,7 +61,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addLetter: letter => dispatch(addLetter(letter))
+    addLetter: letter => dispatch(addLetter(letter)),
+    addLetterScore: wordScore => dispatch(addLetterScore(wordScore))
   };
 };
 
