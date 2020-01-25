@@ -14,12 +14,12 @@ class LetterTile extends React.Component {
 	}
 
 	setMouseDown(event) {
-		this.props.addLetter(this.props.letter)
+		this.props.addLetter({letter: this.props.letter, row: this.props.row, col: this.props.col})
 		// console.log(this.props.word)
 	}
 
 	select(event) {
-		if(this.props.mouseIsDown) this.props.addLetter(this.props.letter)
+		if(this.props.mouseIsDown) this.props.addLetter({letter: this.props.letter, row: this.props.row, col: this.props.col})
 		// console.log(this.props.word)
 	}
 
