@@ -4,6 +4,7 @@ import { addLetter } from "../store/game";
 import "./style/LetterTile.css"
 
 class LetterTile extends React.Component {
+
   constructor() {
     super();
     this.select = this.select.bind(this);
@@ -33,8 +34,7 @@ class LetterTile extends React.Component {
       </div>
     );
   }
-}
-
+  
 const mapStateToProps = state => {
   return {
     word: state.word
