@@ -1,11 +1,3 @@
-/* .board {
-  width: 500px;
-  height: 500px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-} */
-
 .board {
   display: grid;
   grid-gap: 10px;
