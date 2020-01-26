@@ -6,7 +6,7 @@ export default function CurrentWord(props) {
     <ul className="current-letters">
       {letters &&
         letters.map(letter => {
-          return <li>letter</li>;
+          return <li>{letter}</li>;
         })}
     </ul>
   );
