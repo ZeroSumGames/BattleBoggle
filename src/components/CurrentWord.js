@@ -3,11 +3,12 @@ import React from "react";
 export default function CurrentWord(props) {
   let letters = props.letters;
   return (
-    <ul className="current-letters">
+    <div className="current-letters">
       {letters &&
         letters.map(letter => {
-          return <li>{letter}</li>;
+          console.log('!!!!!', letter)
+          return( <div>{letter.value}</div>);
         })}
-    </ul>
+    </div>
   );
 }
