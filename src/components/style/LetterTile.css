@@ -1,9 +1,17 @@
 .letterTile {
-  background-image: radial-gradient( rgb(236, 122, 45),  rgb(168, 100, 44),  rgb(93, 52, 19));
-  color: #fff;
   border-radius: 20px;
   width: 65px;
   height: 65px;
   padding: 8px;
   font-size: 150%;
+}
+
+.selected {
+	background-image: radial-gradient( rgb(93, 52, 19), rgb(168, 100, 44), rgb(236, 122, 45));
+  	color: #fff;
+}
+
+.unselected {
+	background-image: radial-gradient( rgb(236, 122, 45),  rgb(168, 100, 44),  rgb(93, 52, 19));
+  	color: #fff;
 }

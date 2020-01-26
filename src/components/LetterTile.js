@@ -12,7 +12,8 @@ class LetterTile extends React.Component {
     this.checkLetter = this.checkLetter.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   checkLetter(letter) {
 		let row = this.props.row
@@ -32,18 +33,16 @@ class LetterTile extends React.Component {
 
   setMouseDown(event) {
     this.checkLetter(this.props.letter);
-    // console.log(this.props.word)
   }
 
   select(event) {
     if (this.props.mouseIsDown) this.checkLetter(this.props.letter);
-    // console.log(this.props.word)
   }
 
   render() {
     return (
       <div
-        className="letterTile"
+        className={`letterTile ${this.props.seen.has(this.props.letter) > 0 ? 'selected' : 'unselected'}`}
         onMouseOver={event => this.select(event)}
         onMouseDown={event => this.setMouseDown(event)}
       >
