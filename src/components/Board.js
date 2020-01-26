@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import LetterTile from "./LetterTile";
-import ReactDOM from "react-dom";
 import {
   submitWord,
   clearWordScore,
@@ -33,7 +32,9 @@ class Board extends React.Component {
   }
 
   toggleMouseUp(event) {
-    this.setState({ mouseIsDown: !this.state.mouseIsDown });
+    this.setState({ 
+    	mouseIsDown: !this.state.mouseIsDown
+    });
     this.setState({seen: new Set()});
 
     if(this.validateWord(this.props.word)){
