@@ -1,3 +1,6 @@
+// import {linearize} from '/utilites'
+import {TrieNode, createTrie} from './makeTrie'
+
 // ACTION CREATORS
 
 
@@ -10,7 +13,7 @@ const ADD_LETTER_SCORE = 'ADD_LETTER_SCORE'
 const CLEAR_WORD_SCORE = 'CLEAR_WORD_SCORE'
 const ADD_P1_SCORE = 'ADD_P1_SCORE'
 const CLEAR_P1_SCORE = 'CLEAR_P1_SCORE'
-
+const MAKE_DICTIONARY = 'MAKE_DICTIONARY'
 
 // MAKER FUNCTIONS
 
@@ -111,11 +114,15 @@ const initialState = {
 	seen: new Set(),
 	wordScore: 0,
 	p1Score: 0,
-	p2Score: 0
+	p2Score: 0,
+	dictionary: new TrieNode('')
 };
 
-
 // ACTION CREATORS
+
+export const makeDictionary = () => {
+	return {type: MAKE_DICTIONARY}
+}
 
 export const buildBoard = board => {
   return {
@@ -185,6 +192,8 @@ export const addP1Score = score => {
 
 // keep track of what letters we've seen under the hood
 
+
+
 export const wordReducer = (state = initialState.wordLetters, action, seen = initialState.seen) => {
 	switch(action.type) {
 		case ADD_LETTER:
@@ -216,6 +225,11 @@ export const p1ScoreReducer = (state = initialState.p1Score, action) => {
 		default:
 			return state
 	}
+}
+
+export const dictionaryReducer = (state = initialState.dictionary, action) => {
+	let head = createTrie(new TrieNode(''))
+	return head
 }
 
 export const letterReducer = (state = initialState.letters, action) => {

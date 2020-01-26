@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Board from "./Board";
 import Timer from "./Timer"
-import { makeBoard, buildBoard, setLetters } from "../store/game";
+import { makeBoard, buildBoard, setLetters, makeDictionary } from "../store/game";
 import Shop from "./Shop";
 import "./style/Game.css";
 
@@ -13,6 +13,8 @@ class Game extends React.Component {
     this.props.initializeLetters();
 
     this.props.initializeBoard(this.props.letters);
+
+    this.props.initializeDictionary()
   }
 
   componentDidMount() {}
@@ -56,6 +58,9 @@ const mapDispatchToProps = dispatch => {
     },
     initializeBoard: letters => {
       dispatch(buildBoard(makeBoard(letters)));
+    },
+    initializeDictionary: () => {
+      dispatch(makeDictionary())
     }
   };
 };
