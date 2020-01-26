@@ -20,7 +20,7 @@ class Board extends React.Component {
       foundWords: new Set()
     };
 
-    this.validateWord = this.validateWord.bind(this)
+    this.validateWord = this.validateWord.bind(this);
   }
 
   componentDidMount() {
@@ -38,12 +38,11 @@ class Board extends React.Component {
     	seen: new Set()
     });
 
-
-    if(this.validateWord(this.props.word)){
-	    this.props.addP1Score(this.props.wordScore);
-	}
-	this.props.clearWord();
-	this.props.clearWordScore();
+    if (this.validateWord(this.props.word)) {
+      this.props.addP1Score(this.props.wordScore);
+    }
+    this.props.clearWord();
+    this.props.clearWordScore();
   }
 
   validateWord(word) {
