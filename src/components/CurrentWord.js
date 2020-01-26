@@ -2,12 +2,7 @@ import React from "react";
 
 export default function CurrentWord(props) {
   let letters = props.letters;
-  return (
-    <div className="current-letters">
-      {letters &&
-        letters.map(letter => {
-          return( <div>{letter.value}</div>);
-        })}
-    </div>
-  );
+  let word = "";
+  letters.forEach(letter => {return (word += letter.value)});
+  return <div className="current-letters">{`Currently Selected: "${word}"`}</div>;
 }
