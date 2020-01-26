@@ -5,6 +5,7 @@ import Timer from "./Timer"
 import { makeBoard, buildBoard, setLetters, makeDictionary } from "../store/game";
 import Shop from "./Shop";
 import "./style/Game.css";
+import {TrieNode, createTrie} from '../utilities/makeTrie'
 
 class Game extends React.Component {
   constructor(props) {
@@ -14,7 +15,10 @@ class Game extends React.Component {
 
     this.props.initializeBoard(this.props.letters);
 
-    this.props.initializeDictionary()
+    this.state = {
+      dictionary: createTrie(new TrieNode(''))
+    }
+
   }
 
   componentDidMount() {}
@@ -34,7 +38,7 @@ class Game extends React.Component {
           </div>
         </div>
         <div className="body">
-          <Board />
+          <Board dictionary={this.state.dictionary}/>
         </div>
         <div className="footer">
           <Shop />
@@ -58,10 +62,10 @@ const mapDispatchToProps = dispatch => {
     },
     initializeBoard: letters => {
       dispatch(buildBoard(makeBoard(letters)));
-    },
-    initializeDictionary: () => {
-      dispatch(makeDictionary())
     }
+    // initializeDictionary: () => {
+    //   dispatch(makeDictionary())
+    // }
   };
 };
 

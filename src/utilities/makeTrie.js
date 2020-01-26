@@ -1,4 +1,5 @@
-import fs from 'fs'
+import {dictionary as dict} from './dictionary'
+
 
 export class TrieNode {
 	constructor(value) {
@@ -8,16 +9,8 @@ export class TrieNode {
 	}
 }
 
-// const head = new TrieNode('')
-
 export function createTrie(head) {
-	let dictionary = fs
-	.readFileSync(
-		"./dictionary_caps.txt",
-		"utf8"
-	)
-	.split("\n");
-
+	let dictionary = dict.split('\n')
 	dictionary.forEach((word) => {
 		let curr = head
 
@@ -31,7 +24,6 @@ export function createTrie(head) {
 
 		curr.endOfWord = true
 	})
-
 	return head
 }
 
