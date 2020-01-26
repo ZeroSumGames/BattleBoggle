@@ -15,7 +15,7 @@ class ScoreBoard extends Component {
 
 const mapStateToProps = state => {
   return {
-    points: state.p1score
+    points: state.p1Score
   };
 };
 
