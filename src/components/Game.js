@@ -19,36 +19,73 @@ class Game extends React.Component {
     super(props);
 
     this.props.initializeLetters();
-
-    this.props.initializeBoard(this.props.letters);
-
+    
     this.state = {
-      dictionary: createTrie(new TrieNode(""))
+      dictionary: createTrie(new TrieNode("")),
+      foundWordsOnBoard: new Set(),
+      round: 1
     };
+
+    // bind class methods
+    this.makeNewBoard = this.makeNewBoard.bind(this)
+    this.clearFoundWords = this.clearFoundWords.bind(this)
+    this.addFoundWord = this.addFoundWord.bind(this)
+    this.canAddWord = this.canAddWord.bind(this)
+    this.goNextRound = this.goNextRound.bind(this)
+
+    this.goNextRound()
   }
 
   componentDidMount() {}
+
+  clearFoundWords() {
+    this.setState({foundWordsOnBoard: new Set()})
+  }
+
+  goNextRound() {
+    this.setState({
+      round: this.state.round + 1
+    })
+
+    this.makeNewBoard()
+  }
+
+  makeNewBoard() {
+    this.props.initializeBoard(this.props.letters)
+    this.clearFoundWords()
+  }
+
+  addFoundWord(wordString) {
+    this.state.foundWordsOnBoard.add(wordString)
+  }
+
+  canAddWord(wordString) {
+    return !this.state.foundWordsOnBoard.has(wordString)
+  }
 
   render() {
     return (
       <div className="game">
         <h1 className="title">Battle Boggle!</h1>
         <div className="head">
-          <div>{`Round${"#"}`}</div>
+          <div>{`Round #${this.state.round}`}</div>
           <div className="playerScore">
             <div className="Score">
               <ScoreBoard />
             </div>
           </div>
           <div className="timer">
-            <Timer />
+            <Timer goNextRound={this.goNextRound}/>
           </div>
         </div>
         <div className="body">
-          <Board dictionary={this.state.dictionary} />
+          <Board 
+            dictionary={this.state.dictionary}
+            addFoundWord={this.addFoundWord} 
+            canAddWord={this.canAddWord}
+          />
         </div>
         <div className="current-word">
-          {console.log(this.props)}
           <CurrentWord letters={this.props.wordLetters} />
         </div>
         <div className="footer">
