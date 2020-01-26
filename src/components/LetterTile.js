@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addLetter, addLetterScore } from "../store/game";
-import "./style/LetterTile.css"
+import "./style/LetterTile.css";
 
 class LetterTile extends React.Component {
-
   constructor() {
     super();
     this.select = this.select.bind(this);
@@ -12,23 +11,26 @@ class LetterTile extends React.Component {
     this.checkLetter = this.checkLetter.bind(this);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   checkLetter(letter) {
-		let row = this.props.row
-		let col = this.props.col
-		let seen = this.props.seen
-		let word = this.props.word
+    let row = this.props.row;
+    let col = this.props.col;
+    let seen = this.props.seen;
+    let word = this.props.word;
 
-		if(!seen.has(letter)) {
-			// validate via grid
-			if(word.length === 0 || (Math.abs(row - word[word.length - 1].row) <= 1 && Math.abs(col - word[word.length - 1].col) <= 1)){
-				seen.add(letter)
-				this.props.addLetter(letter)
-				this.props.addLetterScore(Number(letter.points))
-			}
-		}
+    if (!seen.has(letter)) {
+      // validate via grid
+      if (
+        word.length === 0 ||
+        (Math.abs(row - word[word.length - 1].row) <= 1 &&
+          Math.abs(col - word[word.length - 1].col) <= 1)
+      ) {
+        seen.add(letter);
+        this.props.addLetter(letter);
+        this.props.addLetterScore(Number(letter.points));
+      }
+    }
   }
 
   setMouseDown(event) {
@@ -42,16 +44,23 @@ class LetterTile extends React.Component {
   render() {
     return (
       <div
-        className={`letterTile ${this.props.seen.has(this.props.letter) > 0 ? 'selected' : 'unselected'}`}
+        className={`letterTile ${
+          this.props.seen.has(this.props.letter) > 0 ? "selected" : "unselected"
+        }`}
         onMouseOver={event => this.select(event)}
         onMouseDown={event => this.setMouseDown(event)}
       >
-        {this.props.letter.value} {this.props.letter.points}
+        <div unselectable="on" className="number">
+          {this.props.letter.points}
+        </div>
+        <div unselectable="on" className="letter">
+          {this.props.letter.value}
+        </div>
       </div>
     );
-	}
+  }
 }
-  
+
 const mapStateToProps = state => {
   return {
     word: state.word
