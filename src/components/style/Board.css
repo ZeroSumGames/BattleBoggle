@@ -2,6 +2,13 @@
   display: grid;
   grid-gap: 8.5px;
   grid-template-columns: 85px 85px 85px 85px;
-  background-image: radial-gradient( rgb(235, 209, 139),  rgb(235, 209, 139),  rgb(246, 214, 125));
-  margin: 2px;
+  background-image: radial-gradient(
+    rgb(235, 209, 139),
+    rgb(235, 209, 139),
+    rgb(246, 214, 125)
+  );
+  /* margin: 3px; */
+  padding: 4px;
+  border: 6px ridge #9b6f41;
+  border-radius: 24px;
 }
