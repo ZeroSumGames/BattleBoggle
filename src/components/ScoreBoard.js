@@ -5,9 +5,13 @@ import Points from "./Points";
 class ScoreBoard extends Component {
   render() {
     return (
-      <div>
-        {/* for each player (1 and 2) pass props and render  */}
-        <Points points={this.props.points} />
+      <div className="scoreBoard">
+        <div>
+          <Points points={this.props.p1Score} />
+        </div>
+        <div>
+          <Points points={this.props.p2Score} />
+        </div>
       </div>
     );
   }
@@ -15,7 +19,8 @@ class ScoreBoard extends Component {
 
 const mapStateToProps = state => {
   return {
-    points: state.p1Score
+    p1Score: state.p1Score,
+    p2Score: state.p2Score
   };
 };
 

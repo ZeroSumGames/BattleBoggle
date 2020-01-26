@@ -13,6 +13,8 @@ const ADD_LETTER_SCORE = 'ADD_LETTER_SCORE'
 const CLEAR_WORD_SCORE = 'CLEAR_WORD_SCORE'
 const ADD_P1_SCORE = 'ADD_P1_SCORE'
 const CLEAR_P1_SCORE = 'CLEAR_P1_SCORE'
+const ADD_P2_SCORE = 'ADD_P2_SCORE'
+const CLEAR_P2_SCORE = 'CLEAR_P2_SCORE'
 // const MAKE_DICTIONARY = 'MAKE_DICTIONARY'
 
 // MAKER FUNCTIONS
@@ -220,6 +222,18 @@ export const p1ScoreReducer = (state = initialState.p1Score, action) => {
 		case ADD_P1_SCORE:
 			return state + action.score
 		case CLEAR_P1_SCORE:
+			return 0
+		default:
+			return state
+	}
+}
+
+
+export const p2ScoreReducer = (state = initialState.p2Score, action) => {
+	switch (action.type) {
+		case ADD_P2_SCORE:
+			return state + action.score
+		case CLEAR_P2_SCORE:
 			return 0
 		default:
 			return state
