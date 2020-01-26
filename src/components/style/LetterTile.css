@@ -7,11 +7,11 @@
 }
 
 .selected {
-	background-image: radial-gradient( rgb(93, 52, 19), rgb(168, 100, 44), rgb(236, 122, 45));
+	background-image: radial-gradient(rgb(236, 153, 45),  rgb(236, 122, 45),  rgb(45, 143, 223),  rgb(45, 57, 223));
   	color: #fff;
 }
 
 .unselected {
-	background-image: radial-gradient( rgb(236, 122, 45),  rgb(168, 100, 44),  rgb(93, 52, 19));
+	background-image: radial-gradient( rgb(236, 153, 45),  rgb(236, 122, 45),  rgb(223, 96, 45));
   	color: #fff;
 }
