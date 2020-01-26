@@ -16,7 +16,8 @@ class Board extends React.Component {
     super();
     this.state = {
       mouseIsDown: false,
-      seen: new Set()
+      seen: new Set(),
+      foundWords: new Set()
     };
 
     this.validateWord = this.validateWord.bind(this);
@@ -32,10 +33,10 @@ class Board extends React.Component {
   }
 
   toggleMouseUp(event) {
-    this.setState({
-      mouseIsDown: !this.state.mouseIsDown
+    this.setState({ 
+    	mouseIsDown: !this.state.mouseIsDown,
+    	seen: new Set()
     });
-    this.setState({ seen: new Set() });
 
     if (this.validateWord(this.props.word)) {
       this.props.addP1Score(this.props.wordScore);
@@ -45,15 +46,22 @@ class Board extends React.Component {
   }
 
   validateWord(word) {
-    let curr = this.props.dictionary;
+  	let curr = this.props.dictionary
+  	let wordStringVal = ""
 
-    for (let letter of word) {
-      let currLetter = letter.value;
-      if (!curr.children[currLetter]) return false;
-      curr = curr.children[currLetter];
-    }
+  	for(let letter of word){
+  		let currLetter = letter.value
+  		if(!curr.children[currLetter]) return false
+  		curr = curr.children[currLetter]
+  		wordStringVal += currLetter
+  	}
 
-    return curr.endOfWord;
+  	if(curr.endOfWord && !this.state.foundWords.has(wordStringVal)){
+  		this.state.foundWords.add(wordStringVal)
+  		return true
+  	}
+
+  	return false
   }
 
   render() {
