@@ -35,9 +35,9 @@ class Board extends React.Component {
   }
 
   toggleMouseUp(event) {
-    this.setState({ 
-    	mouseIsDown: !this.state.mouseIsDown,
-    	seen: new Set()
+    this.setState({
+      mouseIsDown: !this.state.mouseIsDown,
+      seen: new Set()
     });
 
     if (this.validateWord(this.props.word)) {
@@ -48,6 +48,7 @@ class Board extends React.Component {
   }
 
   validateWord(word) {
+
   	let curr = this.props.dictionary
   	let wordStringVal = ""
 
@@ -64,6 +65,7 @@ class Board extends React.Component {
   	}
 
   	return false
+
   }
 
   render() {
