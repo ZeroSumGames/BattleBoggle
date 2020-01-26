@@ -6,7 +6,6 @@ export default function CurrentWord(props) {
     <div className="current-letters">
       {letters &&
         letters.map(letter => {
-          console.log('!!!!!', letter)
           return( <div>{letter.value}</div>);
         })}
     </div>
