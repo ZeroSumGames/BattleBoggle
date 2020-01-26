@@ -37,8 +37,6 @@ class Board extends React.Component {
     this.props.addP1Score(this.props.wordScore);
     this.props.clearWord();
     this.props.clearWordScore();
-
-    console.log("fdsfsdf");
   }
 
   render() {
