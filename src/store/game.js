@@ -15,6 +15,8 @@ const ADD_P1_SCORE = 'ADD_P1_SCORE'
 const CLEAR_P1_SCORE = 'CLEAR_P1_SCORE'
 const ADD_P2_SCORE = 'ADD_P2_SCORE'
 const CLEAR_P2_SCORE = 'CLEAR_P2_SCORE'
+const ADD_TO_FOUND_WORDS = 'ADD_TO_FOUND_WORDS'
+const CLEAR_FOUND_WORDS = 'CLEAR_FOUND_WORDS'
 // const MAKE_DICTIONARY = 'MAKE_DICTIONARY'
 
 // MAKER FUNCTIONS
@@ -192,7 +194,6 @@ export const addP1Score = score => {
 // REDUCERS
 
 // keep track of what letters we've seen under the hood
-
 
 
 export const wordReducer = (state = initialState.wordLetters, action, seen = initialState.seen) => {
