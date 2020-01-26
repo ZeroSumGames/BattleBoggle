@@ -1,12 +1,18 @@
 import React from "react";
 import { connect } from "react-redux";
 import Board from "./Board";
-import Timer from "./Timer"
-import ScoreBoard from "./ScoreBoard"
-import { makeBoard, buildBoard, setLetters, makeDictionary } from "../store/game";
+import Timer from "./Timer";
+import ScoreBoard from "./ScoreBoard";
 import Shop from "./Shop";
+import CurrentWord from "./CurrentWord";
+import {
+  makeBoard,
+  buildBoard,
+  setLetters,
+  makeDictionary
+} from "../store/game";
 import "./style/Game.css";
-import {TrieNode, createTrie} from '../utilities/makeTrie'
+import { TrieNode, createTrie } from "../utilities/makeTrie";
 
 class Game extends React.Component {
   constructor(props) {
@@ -17,9 +23,8 @@ class Game extends React.Component {
     this.props.initializeBoard(this.props.letters);
 
     this.state = {
-      dictionary: createTrie(new TrieNode(''))
-    }
-
+      dictionary: createTrie(new TrieNode(""))
+    };
   }
 
   componentDidMount() {}
@@ -40,7 +45,11 @@ class Game extends React.Component {
           </div>
         </div>
         <div className="body">
-          <Board dictionary={this.state.dictionary}/>
+          <Board dictionary={this.state.dictionary} />
+        </div>
+        <div className="current-word">
+          {console.log(this.props)}
+          <CurrentWord letters={this.props.wordLetters} />
         </div>
         <div className="footer">
           <Shop />
@@ -53,7 +62,8 @@ class Game extends React.Component {
 const mapStateToProps = state => {
   return {
     letters: state.letters,
-    powers: state.powers
+    powers: state.powers,
+    wordLetters: state.word
   };
 };
 
