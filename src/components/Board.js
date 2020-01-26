@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import LetterTile from "./LetterTile";
-import { linearize } from "../utilities";
 import ReactDOM from "react-dom";
 import {
   submitWord,
@@ -17,8 +16,11 @@ class Board extends React.Component {
   constructor() {
     super();
     this.state = {
-      mouseIsDown: false
+      mouseIsDown: false,
+      seen: new Set()
     };
+
+    this.validateWord = this.validateWord.bind(this)
   }
 
   componentDidMount() {
@@ -32,11 +34,25 @@ class Board extends React.Component {
 
   toggleMouseUp(event) {
     this.setState({ mouseIsDown: !this.state.mouseIsDown });
-    // this.props.checkWord(this.props.wordScore)
+    this.setState({seen: new Set()});
 
-    this.props.addP1Score(this.props.wordScore);
-    this.props.clearWord();
-    this.props.clearWordScore();
+    if(this.validateWord(this.props.word)){
+	    this.props.addP1Score(this.props.wordScore);
+	}
+	this.props.clearWord();
+	this.props.clearWordScore();
+  }
+
+  validateWord(word) {
+  	let curr = this.props.dictionary
+
+  	for(let letter of word){
+  		let currLetter = letter.value
+  		if(!curr.children[currLetter]) return false
+  		curr = curr.children[currLetter]
+  	}
+
+  	return curr.endOfWord
   }
 
   render() {
@@ -57,6 +73,7 @@ class Board extends React.Component {
                 key={i}
                 row={Math.floor(i / 4)}
                 col={i % 4}
+                seen={this.state.seen}
               />
             );
           })}
@@ -68,7 +85,8 @@ class Board extends React.Component {
 const mapStateToProps = state => {
   return {
     board: state.board,
-    wordScore: state.wordScore
+    wordScore: state.wordScore,
+    word: state.word
   };
 };
 

@@ -10,6 +10,7 @@ import {
   	powerReducer as powers,
   	wordScoreReducer as wordScore,
   	p1ScoreReducer as p1Score
+  	// dictionaryReducer as dictionary
 } from './game'
 
 // combine reducers here
@@ -20,6 +21,7 @@ const reducer = combineReducers({
 	powers,
 	wordScore,
 	p1Score
+	// dictionary
 })
 
 // include middlewares
