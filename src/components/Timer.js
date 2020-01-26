@@ -10,7 +10,7 @@ export default class Timer extends Component {
   render() {
     let settings = {
       className: "timer",
-      count: 180,
+      count: 15,
       border: true,
       showTitle: false,
       noPoints: false,
@@ -18,8 +18,10 @@ export default class Timer extends Component {
       hideHours: true,
       direction: "left",
       // labelSize: 18,
-      size: 35
-      // onEnd: this is a function.
+      size: 35,
+      onEnd: () => {
+        this.props.goNextRound()
+      }
       //there is something called on-end as a property that may give us the ability to end the game when it hits 0
     };
     return <CountdownTimer {...settings} />;

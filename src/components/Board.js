@@ -16,16 +16,18 @@ class Board extends React.Component {
     super();
     this.state = {
       mouseIsDown: false,
-      seen: new Set(),
-      foundWords: new Set()
+      seen: new Set()
     };
 
     this.validateWord = this.validateWord.bind(this);
+    this.resetFoundWords = this.resetFoundWords.bind(this)
   }
 
   componentDidMount() {
-    // ReactDOM.findDOMNode(this).addEventListener('')
-    // this.clicked = this.clicked.bind(this)
+  }
+
+  resetFoundWords() {
+  	this.setState({foundWords: new Set()})
   }
 
   toggleMouseDown(event) {
@@ -46,22 +48,24 @@ class Board extends React.Component {
   }
 
   validateWord(word) {
-    let curr = this.props.dictionary;
-    let wordStringVal = "";
 
-    for (let letter of word) {
-      let currLetter = letter.value;
-      if (!curr.children[currLetter]) return false;
-      curr = curr.children[currLetter];
-      wordStringVal += currLetter;
-    }
+  	let curr = this.props.dictionary
+  	let wordStringVal = ""
 
-    if (curr.endOfWord && !this.state.foundWords.has(wordStringVal)) {
-      this.state.foundWords.add(wordStringVal);
-      return true;
-    }
+  	for(let letter of word){
+  		let currLetter = letter.value
+  		if(!curr.children[currLetter]) return false
+  		curr = curr.children[currLetter]
+  		wordStringVal += currLetter
+  	}
 
-    return false;
+  	if(curr.endOfWord && this.props.canAddWord(wordStringVal)){
+  		this.props.addFoundWord(wordStringVal)
+  		return true
+  	}
+
+  	return false
+
   }
 
   render() {
