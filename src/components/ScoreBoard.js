@@ -1,13 +1,26 @@
 import React, { Component } from "react";
-import Points from "./Points"
+import { connect } from "react-redux";
+import Points from "./Points";
 
-export default class ScoreBoard extends Component {
+class ScoreBoard extends Component {
   render() {
     return (
       <div>
         {/* for each player (1 and 2) pass props and render  */}
-        <Points />
+        <Points points={this.props.points} />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    points: state.p1score
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreBoard);

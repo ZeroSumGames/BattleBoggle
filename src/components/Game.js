@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Board from "./Board";
 import Timer from "./Timer"
+import ScoreBoard from "./ScoreBoard"
 import { makeBoard, buildBoard, setLetters } from "../store/game";
 import Shop from "./Shop";
 import "./style/Game.css";
@@ -24,8 +25,9 @@ class Game extends React.Component {
         <div className="head">
           <div>{`Round${"#"}`}</div>
           <div className="playerScore">
-            <div className="player1Score"></div>
-            <div className="player2Score"></div>
+            <div className="Score">
+              <ScoreBoard />
+            </div>
           </div>
           <div className="timer">
             <Timer />

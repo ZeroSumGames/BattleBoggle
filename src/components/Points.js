@@ -1,7 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-export default class Points extends Component {
-  render() {
-    return <div></div>;
-  }
+export default function Points(props) {
+  return( <div>{props.points}</div>)
 }
