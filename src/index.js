@@ -6,10 +6,11 @@ import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
 import store from "./store";
 
-// ReactDOM.render(
-// 		<App />,
-// 	document.getElementById('root')
-// );
+
+// document.addEventListener('DOMContentLoaded', () => {
+// 	const socket = io(window.location.origin);
+// 	socket.emit('SEND', 'hello world');
+// });
 
 ReactDOM.render(
   <Provider store={store}>

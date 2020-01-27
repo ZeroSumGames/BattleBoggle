@@ -14,9 +14,16 @@ import {
 import "./style/Game.css";
 import { TrieNode, createTrie } from "../utilities/makeTrie";
 
+// socket subscription
+import { subscribeToTimer, subscribeToP2Points, sendUpdatedScore } from '../socketConnect';
+
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
+
+    subscribeToTimer((err, timestamp) => this.printToScreen(timestamp))
+    // subscribeToP2Points(() => this.updateP2Score())
 
     this.props.initializeLetters();
     
@@ -38,6 +45,10 @@ class Game extends React.Component {
 
   componentDidMount() {}
 
+  printToScreen(value){
+    // console.log(value);
+  }
+
   clearFoundWords() {
     this.setState({foundWordsOnBoard: new Set()})
   }
@@ -56,7 +67,9 @@ class Game extends React.Component {
   }
 
   addFoundWord(wordString) {
+    // send updated score to server
     this.state.foundWordsOnBoard.add(wordString)
+    sendUpdatedScore(this.props.p1Score)
   }
 
   canAddWord(wordString) {
@@ -100,7 +113,9 @@ const mapStateToProps = state => {
   return {
     letters: state.letters,
     powers: state.powers,
-    wordLetters: state.word
+    wordLetters: state.word,
+    p2Score: state.p2Score,
+    p1Score: state.p1Score
   };
 };
 

@@ -61,14 +61,17 @@ class Board extends React.Component {
     this.setState({ pointerIsDown: !this.state.pointerIsDown });
   }
 
-  togglePointerUp(event) {
+  async togglePointerUp(event) {
     this.setState({
       pointerIsDown: !this.state.pointerIsDown,
       seen: new Set()
     });
 
-    if (this.validateWord(this.props.word)) {
-      this.props.addP1Score(this.props.wordScore);
+    let validate = this.validateWord(this.props.word)
+
+    if (validate.res) {
+      await this.props.addP1Score(this.props.wordScore);
+      this.props.addFoundWord(validate.wordStringVal);
     }
     this.props.clearWord();
     this.props.clearWordScore();
@@ -81,17 +84,16 @@ class Board extends React.Component {
 
   	for(let letter of word){
   		let currLetter = letter.value
-  		if(!curr.children[currLetter]) return false
+  		if(!curr.children[currLetter]) return {res: false, wordStringVal: wordStringVal}
   		curr = curr.children[currLetter]
   		wordStringVal += currLetter
   	}
 
   	if(curr.endOfWord && this.props.canAddWord(wordStringVal)){
-  		this.props.addFoundWord(wordStringVal)
-  		return true
+  		return {res: true, wordStringVal: wordStringVal}
   	}
 
-  	return false
+  	return {res: false, wordStringVal: wordStringVal}
 
   }
 
