@@ -15,28 +15,55 @@ class Board extends React.Component {
   constructor() {
     super();
     this.state = {
-      mouseIsDown: false,
+      pointerIsDown: false,
       seen: new Set()
     };
 
+    // bind methods
     this.validateWord = this.validateWord.bind(this);
-    this.resetFoundWords = this.resetFoundWords.bind(this)
+    this.resetFoundWords = this.resetFoundWords.bind(this);
+    this.togglePointerDown = this.togglePointerDown.bind(this);
+    this.togglePointerUp = this.togglePointerUp.bind(this);
+
+    // initialize proper event listeners
+    this.eventHanlders = {}
+
+    if(window.PointerEvent) {
+    	this.eventHandlers = {
+    		onPointerDown: event => this.togglePointerDown(event),
+    		onPointerUp: event => this.togglePointerUp(event)
+    	}
+    }
+    else {
+    	this.eventHandlers = {
+    		onMouseUp: event => this.togglePointerUp(event),
+    		onMouseDown: event => this.togglePointerUp(event)
+    	}
+    }
+
   }
 
   componentDidMount() {
+  }
+
+  componentWillUnmount() {
+  	if(window.PointerEvent) {
+  		window.removeEventListener('pointerdown', this.togglePointerDown);
+		window.removeEventListener('pointerup', this.togglePointerUp)
+  	}
   }
 
   resetFoundWords() {
   	this.setState({foundWords: new Set()})
   }
 
-  toggleMouseDown(event) {
-    this.setState({ mouseIsDown: !this.state.mouseIsDown });
+  togglePointerDown(event) {
+    this.setState({ pointerIsDown: !this.state.pointerIsDown });
   }
 
-  toggleMouseUp(event) {
+  togglePointerUp(event) {
     this.setState({
-      mouseIsDown: !this.state.mouseIsDown,
+      pointerIsDown: !this.state.pointerIsDown,
       seen: new Set()
     });
 
@@ -74,14 +101,13 @@ class Board extends React.Component {
     return (
       <div
         className="board"
-        onMouseDown={event => this.toggleMouseDown(event)}
-        onMouseUp={event => this.toggleMouseUp(event)}
+ 		{...this.eventHandlers}
       >
         {board &&
           board.map((letter, i) => {
             return (
               <LetterTile
-                mouseIsDown={this.state.mouseIsDown}
+                pointerIsDown={this.state.pointerIsDown}
                 letter={letter}
                 key={i}
                 row={Math.floor(i / 4)}
