@@ -6,12 +6,45 @@ import "./style/LetterTile.css";
 class LetterTile extends React.Component {
   constructor() {
     super();
-    this.select = this.select.bind(this);
-    this.setMouseDown = this.setMouseDown.bind(this);
+
+    // bind methods
+    this.handlePointerOver = this.handlePointerOver.bind(this);
+    this.setPointerDown = this.setPointerDown.bind(this);
     this.checkLetter = this.checkLetter.bind(this);
+    // this.handleGestureEnd = this.handleGestureEnd.bind(this);
+    // this.getGesturePointFromEvent = this.getGesturePointFromEvent.bind(this);
+
+    
+    // initialize proper event listeners
+    this.eventHandlers = {};
+    // this.initialTouchPos = {};
+
+    if(window.PointerEvent) {
+      this.eventHandlers = {
+        onPointerDown: event => this.setPointerDown(event),
+        onPointerOver: event => this.handlePointerOver(event)
+        // onPointerUp: event => this.handleGestureEnd(event),
+        // onPointerEnd: event => this.handleGestureEnd(event)
+      }
+    } 
+    else {
+      this.eventHandlers = {
+        onMouseOver: event => this.handlePointerOver(event),
+        onMouseDown: event => this.setPointerDown(event)
+        // onMouseUp: event => this.handleGestureEnd(event)
+      }
+    }
   }
 
   componentDidMount() {}
+  componentWillUnmount() {
+    if(window.PointerEvent) {
+      window.removeEventListener('pointerdown', this.setPointerDown);
+      window.removeEventListener('pointerover', this.handlePointerOver);
+    }
+    window.removeEventListener('mousedown', this.setPointerDown);
+    window.removeEventListener('mouseover', this.handlePointerOver);
+  }
 
   checkLetter(letter) {
     let row = this.props.row;
@@ -33,12 +66,22 @@ class LetterTile extends React.Component {
     }
   }
 
-  setMouseDown(event) {
+  setPointerDown(event) {
+    event.preventDefault();
+
+    // if(event.touches && event.touches.length > 1) {
+    //   return;
+    // }
+
+    // if (window.PointerEvent) event.target.setPointerCapture(event.pointerId);
+
+    // this.initialTouchPos = this.getGesturePointFromEvent(event);
+
     this.checkLetter(this.props.letter);
   }
 
-  select(event) {
-    if (this.props.mouseIsDown) this.checkLetter(this.props.letter);
+  handlePointerOver(event) {
+    if (this.props.pointerIsDown) this.checkLetter(this.props.letter);
   }
 
   render() {
@@ -47,8 +90,7 @@ class LetterTile extends React.Component {
         className={`letterTile ${
           this.props.seen.has(this.props.letter) > 0 ? "selected" : "unselected"
         }`}
-        onMouseOver={event => this.select(event)}
-        onMouseDown={event => this.setMouseDown(event)}
+        {...this.eventHandlers}
       >
         <div unselectable="on" className="number">
           {this.props.letter.points}
