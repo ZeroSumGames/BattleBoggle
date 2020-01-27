@@ -7,7 +7,9 @@ export function subscribeToTimer(callback) {
 }
 
 export function subscribeToP2Points (callback) {
-	socket.on('p2ScoreUpdated', () => callback());
+	socket.on('p2ScoreUpdated', (points) => {
+		callback(points);
+	});
 }
 
 // called in Game under 'addFoundWord' method
