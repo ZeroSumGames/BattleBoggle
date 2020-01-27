@@ -26,35 +26,32 @@ class Board extends React.Component {
     this.togglePointerUp = this.togglePointerUp.bind(this);
 
     // initialize proper event listeners
-    this.eventHanlders = {}
+    this.eventHanlders = {};
 
-    if(window.PointerEvent) {
-    	this.eventHandlers = {
-    		onPointerDown: event => this.togglePointerDown(event),
-    		onPointerUp: event => this.togglePointerUp(event)
-    	}
+    if (window.PointerEvent) {
+      this.eventHandlers = {
+        onPointerDown: event => this.togglePointerDown(event),
+        onPointerUp: event => this.togglePointerUp(event)
+      };
+    } else {
+      this.eventHandlers = {
+        onMouseUp: event => this.togglePointerUp(event),
+        onMouseDown: event => this.togglePointerUp(event)
+      };
     }
-    else {
-    	this.eventHandlers = {
-    		onMouseUp: event => this.togglePointerUp(event),
-    		onMouseDown: event => this.togglePointerUp(event)
-    	}
-    }
-
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   componentWillUnmount() {
-  	if(window.PointerEvent) {
-  		window.removeEventListener('pointerdown', this.togglePointerDown);
-		window.removeEventListener('pointerup', this.togglePointerUp)
-  	}
+    if (window.PointerEvent) {
+      window.removeEventListener("pointerdown", this.togglePointerDown);
+      window.removeEventListener("pointerup", this.togglePointerUp);
+    }
   }
 
   resetFoundWords() {
-  	this.setState({foundWords: new Set()})
+    this.setState({ foundWords: new Set() });
   }
 
   togglePointerDown(event) {
@@ -67,7 +64,7 @@ class Board extends React.Component {
       seen: new Set()
     });
 
-    let validate = this.validateWord(this.props.word)
+    let validate = this.validateWord(this.props.word);
 
     if (validate.res) {
       await this.props.addP1Score(this.props.wordScore);
@@ -78,33 +75,29 @@ class Board extends React.Component {
   }
 
   validateWord(word) {
+    let curr = this.props.dictionary;
+    let wordStringVal = "";
 
-  	let curr = this.props.dictionary
-  	let wordStringVal = ""
+    for (let letter of word) {
+      let currLetter = letter.value;
+      if (!curr.children[currLetter])
+        return { res: false, wordStringVal: wordStringVal };
+      curr = curr.children[currLetter];
+      wordStringVal += currLetter;
+    }
 
-  	for(let letter of word){
-  		let currLetter = letter.value
-  		if(!curr.children[currLetter]) return {res: false, wordStringVal: wordStringVal}
-  		curr = curr.children[currLetter]
-  		wordStringVal += currLetter
-  	}
+    if (curr.endOfWord && this.props.canAddWord(wordStringVal)) {
+      return { res: true, wordStringVal: wordStringVal };
+    }
 
-  	if(curr.endOfWord && this.props.canAddWord(wordStringVal)){
-  		return {res: true, wordStringVal: wordStringVal}
-  	}
-
-  	return {res: false, wordStringVal: wordStringVal}
-
+    return { res: false, wordStringVal: wordStringVal };
   }
 
   render() {
     let board = this.props.board;
 
     return (
-      <div
-        className="board"
- 		{...this.eventHandlers}
-      >
+      <div className="board" {...this.eventHandlers}>
         {board &&
           board.map((letter, i) => {
             return (

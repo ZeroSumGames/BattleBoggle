@@ -1,0 +1,33 @@
+.scoreBoardContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.scoreBoard {
+  background-color: #252320ed;
+  border: 6px ridge #9b6f41;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 350px;
+  height: 30px;
+  line-height: 25px;
+}
+
+.points {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+/* this will be used to transition numbers on change */
+.points2 {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+
