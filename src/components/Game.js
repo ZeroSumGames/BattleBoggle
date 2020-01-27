@@ -87,7 +87,8 @@ class Game extends React.Component {
       <div className="game">
         <h1 className="title">Battle Boggle!</h1>
         <div className="head">
-          <div>{`Round #${this.state.round}`}</div>
+          {/* temporarily Tabling this until we add further features */}
+          {/* <div>{`Round #${this.state.round}`}</div> */}
           <div className="playerScore">
             <div className="Score">
               <ScoreBoard />
