@@ -16,5 +16,3 @@ export function subscribeToP2Points (callback) {
 export function sendUpdatedScore (points) {
 	socket.emit('updatePoints', points)
 }
-
-// export { subscribeToTimer };
