@@ -9,7 +9,8 @@ import {
   makeBoard,
   buildBoard,
   setLetters,
-  makeDictionary
+  makeDictionary,
+  setP2Score
 } from "../store/game";
 import "./style/Game.css";
 import { TrieNode, createTrie } from "../utilities/makeTrie";
@@ -22,8 +23,16 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
 
-    subscribeToTimer((err, timestamp) => this.printToScreen(timestamp))
-    // subscribeToP2Points(() => this.updateP2Score())
+    // bind class methods
+    this.makeNewBoard = this.makeNewBoard.bind(this)
+    this.clearFoundWords = this.clearFoundWords.bind(this)
+    this.addFoundWord = this.addFoundWord.bind(this)
+    this.canAddWord = this.canAddWord.bind(this)
+    this.goNextRound = this.goNextRound.bind(this)
+    this.updateP2Score = this.updateP2Score.bind(this)
+
+    subscribeToTimer((err, timestamp) => this.printToScreen(timestamp));
+    subscribeToP2Points(this.updateP2Score);
 
     this.props.initializeLetters();
     
@@ -33,20 +42,17 @@ class Game extends React.Component {
       round: 1
     };
 
-    // bind class methods
-    this.makeNewBoard = this.makeNewBoard.bind(this)
-    this.clearFoundWords = this.clearFoundWords.bind(this)
-    this.addFoundWord = this.addFoundWord.bind(this)
-    this.canAddWord = this.canAddWord.bind(this)
-    this.goNextRound = this.goNextRound.bind(this)
-
     this.goNextRound()
   }
 
   componentDidMount() {}
 
   printToScreen(value){
-    // console.log(value);
+
+  }
+
+  updateP2Score(newP2Score) {
+    this.props.setP2Score(newP2Score);
   }
 
   clearFoundWords() {
@@ -126,6 +132,9 @@ const mapDispatchToProps = dispatch => {
     },
     initializeBoard: letters => {
       dispatch(buildBoard(makeBoard(letters)));
+    },
+    setP2Score: score => {
+      dispatch(setP2Score(score))
     }
     // initializeDictionary: () => {
     //   dispatch(makeDictionary())

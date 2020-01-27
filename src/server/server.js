@@ -4,16 +4,18 @@ const socketio = require('socket.io');
 const server = require('http').createServer();
 const app = express();
 
+const path = require('path');
+
 server.listen(3000, () => {
 	console.log("Serving on port 3000")
 })
 
 server.on('request', app);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.resolve('../../public')));
 
 app.get("*", (req, res) => {
-	res.sendFile(__dirname + "/public/index.html");
+	res.sendFile(path.resolve("../../public/index.html"));
 })
 
 const io = socketio(server);
