@@ -17,11 +17,13 @@ import "./style/CurrentWord.css";
 import { TrieNode, createTrie } from "../utilities/makeTrie";
 
 // socket subscription
-import {
-  subscribeToTimer,
-  subscribeToP2Points,
-  sendUpdatedScore
-} from "../socketConnect";
+
+import { 
+  subscribeToTimer, 
+  subscribeToP2Points, 
+  sendUpdatedScore,
+  subscribeToBoard
+ } from '../socketConnect';
 
 class Game extends React.Component {
   constructor(props) {
@@ -37,6 +39,7 @@ class Game extends React.Component {
 
     subscribeToTimer((err, timestamp) => this.printToScreen(timestamp));
     subscribeToP2Points(this.updateP2Score);
+    subscribeToBoard(this.makeNewBoard)
 
     this.props.initializeLetters();
 
@@ -65,13 +68,12 @@ class Game extends React.Component {
     this.setState({
       round: this.state.round + 1
     });
-
-    this.makeNewBoard();
   }
 
-  makeNewBoard() {
-    this.props.initializeBoard(this.props.letters);
-    this.clearFoundWords();
+  makeNewBoard(board) {
+    // this.props.initializeBoard(this.props.letters)
+    this.props.setNewBoard(board)
+    this.clearFoundWords()
   }
 
   addFoundWord(wordString) {
@@ -139,6 +141,9 @@ const mapDispatchToProps = dispatch => {
     },
     initializeBoard: letters => {
       dispatch(buildBoard(makeBoard(letters)));
+    },
+    setNewBoard: board => {
+      dispatch(buildBoard(board))
     },
     setP2Score: score => {
       dispatch(setP2Score(score));
