@@ -13,73 +13,75 @@ import {
   setP2Score
 } from "../store/game";
 import "./style/Game.css";
+import "./style/CurrentWord.css";
 import { TrieNode, createTrie } from "../utilities/makeTrie";
 
 // socket subscription
-import { subscribeToTimer, subscribeToP2Points, sendUpdatedScore } from '../socketConnect';
-
+import {
+  subscribeToTimer,
+  subscribeToP2Points,
+  sendUpdatedScore
+} from "../socketConnect";
 
 class Game extends React.Component {
   constructor(props) {
     super(props);
 
     // bind class methods
-    this.makeNewBoard = this.makeNewBoard.bind(this)
-    this.clearFoundWords = this.clearFoundWords.bind(this)
-    this.addFoundWord = this.addFoundWord.bind(this)
-    this.canAddWord = this.canAddWord.bind(this)
-    this.goNextRound = this.goNextRound.bind(this)
-    this.updateP2Score = this.updateP2Score.bind(this)
+    this.makeNewBoard = this.makeNewBoard.bind(this);
+    this.clearFoundWords = this.clearFoundWords.bind(this);
+    this.addFoundWord = this.addFoundWord.bind(this);
+    this.canAddWord = this.canAddWord.bind(this);
+    this.goNextRound = this.goNextRound.bind(this);
+    this.updateP2Score = this.updateP2Score.bind(this);
 
     subscribeToTimer((err, timestamp) => this.printToScreen(timestamp));
     subscribeToP2Points(this.updateP2Score);
 
     this.props.initializeLetters();
-    
+
     this.state = {
       dictionary: createTrie(new TrieNode("")),
       foundWordsOnBoard: new Set(),
       round: 1
     };
 
-    this.goNextRound()
+    this.goNextRound();
   }
 
   componentDidMount() {}
 
-  printToScreen(value){
-
-  }
+  printToScreen(value) {}
 
   updateP2Score(newP2Score) {
     this.props.setP2Score(newP2Score);
   }
 
   clearFoundWords() {
-    this.setState({foundWordsOnBoard: new Set()})
+    this.setState({ foundWordsOnBoard: new Set() });
   }
 
   goNextRound() {
     this.setState({
       round: this.state.round + 1
-    })
+    });
 
-    this.makeNewBoard()
+    this.makeNewBoard();
   }
 
   makeNewBoard() {
-    this.props.initializeBoard(this.props.letters)
-    this.clearFoundWords()
+    this.props.initializeBoard(this.props.letters);
+    this.clearFoundWords();
   }
 
   addFoundWord(wordString) {
     // send updated score to server
-    this.state.foundWordsOnBoard.add(wordString)
-    sendUpdatedScore(this.props.p1Score)
+    this.state.foundWordsOnBoard.add(wordString);
+    sendUpdatedScore(this.props.p1Score);
   }
 
   canAddWord(wordString) {
-    return !this.state.foundWordsOnBoard.has(wordString)
+    return !this.state.foundWordsOnBoard.has(wordString);
   }
 
   render() {
@@ -95,18 +97,20 @@ class Game extends React.Component {
             </div>
           </div>
           <div className="timer">
-            <Timer goNextRound={this.goNextRound}/>
+            <Timer goNextRound={this.goNextRound} />
           </div>
         </div>
         <div className="body">
-          <Board 
+          <Board
             dictionary={this.state.dictionary}
-            addFoundWord={this.addFoundWord} 
+            addFoundWord={this.addFoundWord}
             canAddWord={this.canAddWord}
           />
         </div>
-        <div className="current-word">
-          <CurrentWord letters={this.props.wordLetters} />
+        <div className="word-container">
+          <div className="current-word">
+            <CurrentWord letters={this.props.wordLetters} />
+          </div>
         </div>
         <div className="footer">
           <Shop />
@@ -135,7 +139,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(buildBoard(makeBoard(letters)));
     },
     setP2Score: score => {
-      dispatch(setP2Score(score))
+      dispatch(setP2Score(score));
     }
     // initializeDictionary: () => {
     //   dispatch(makeDictionary())
