@@ -14,6 +14,7 @@ const ADD_P1_SCORE = "ADD_P1_SCORE";
 const CLEAR_P1_SCORE = "CLEAR_P1_SCORE";
 const ADD_P2_SCORE = "ADD_P2_SCORE";
 const CLEAR_P2_SCORE = "CLEAR_P2_SCORE";
+const SET_P2_SCORE = "SET_P2_SCORE";
 
 // const MAKE_DICTIONARY = 'MAKE_DICTIONARY'
 
@@ -185,6 +186,20 @@ export const addP1Score = score => {
   };
 };
 
+export const addP2Score = score => {
+  return {
+    type: ADD_P2_SCORE,
+    score
+  };
+}
+
+export const setP2Score = score => {
+  return {
+    type: SET_P2_SCORE,
+    score
+  }
+}
+
 // REDUCERS
 
 export const wordReducer = (
@@ -230,6 +245,8 @@ export const p2ScoreReducer = (state = initialState.p2Score, action) => {
       return state + action.score;
     case CLEAR_P2_SCORE:
       return 0;
+    case SET_P2_SCORE:
+      return action.score;
     default:
       return state;
   }
