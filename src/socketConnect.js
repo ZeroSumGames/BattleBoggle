@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:3000');
+const socket = openSocket('http://localhost:3000'); //https://secure-tundra-45786.herokuapp.com:3000
 
 export function subscribeToTimer(callback) {
 	socket.on('timer', timestamp => callback(null, timestamp));
