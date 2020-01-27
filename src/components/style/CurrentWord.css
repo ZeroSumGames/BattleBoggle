@@ -1,0 +1,23 @@
+.current-letters {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.current-word {
+  background-color: #252320ed;
+  border: 6px ridge #9b6f41;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 365px;
+  height: 30px;
+  line-height: 25px;
+}
+
+.word-container{
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./style/CurrentWord.css"
 
 export default function CurrentWord(props) {
   let letters = props.letters;
