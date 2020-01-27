@@ -86,6 +86,7 @@ class Game extends React.Component {
 
   render() {
     return (
+      <div className="background">
       <div className="game">
         <h1 className="title">Battle Boggle!</h1>
         <div className="head">
@@ -115,6 +116,7 @@ class Game extends React.Component {
         <div className="footer">
           <Shop />
         </div>
+      </div>
       </div>
     );
   }
