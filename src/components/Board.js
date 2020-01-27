@@ -103,7 +103,7 @@ class Board extends React.Component {
     return (
       <div
         className="board"
- 		{...this.eventHandlers}
+ 		   {...this.eventHandlers}
       >
         {board &&
           board.map((letter, i) => {
