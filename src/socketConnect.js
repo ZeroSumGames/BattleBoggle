@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://secure-tundra-45786.herokuapp.com:19739'); //
+const socket = openSocket(`localhost:${process.env.PORT || 2999}`); //'https://secure-tundra-45786.herokuapp.com:41248'
 
 console.log('Connected!')
 
