@@ -1,7 +1,7 @@
 import openSocket from 'socket.io-client';
 const socket = openSocket(`localhost:${Number(process.env.PORT) - 1 || 2999}`); //'https://secure-tundra-45786.herokuapp.com:41248'
 
-console.log('Connected!')
+console.log(Number(process.env.PORT) - 1);
 
 export function subscribeToTimer(callback) {
 	socket.on('timer', timestamp => callback(null, timestamp));
