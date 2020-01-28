@@ -39,7 +39,23 @@ export function makeBoard(letters) {
 
 const initialState = {
   letters: {},
-  board: [],
+  board: [
+    {id: 2, value: "C", points: 4, frequency: 5, row: 0, col: 0},
+    {id: 11, value: "L", points: 3, frequency: 4, row: 0, col: 1},
+    {id: 18, value: "S", points: 1, frequency: 6, row: 0, col: 2},
+    {id: 12, value: "M", points: 4, frequency: 3, row: 0, col: 3},
+    {id: 4, value: "E", points: 1, frequency: 15, row: 1, col: 0},
+    {id: 11, value: "L", points: 3, frequency: 4, row: 1, col: 1},
+    {id: 14, value: "O", points: 1, frequency: 8, row: 1, col: 2},
+    {id: 4, value: "E", points: 1, frequency: 15, row: 1, col: 3},
+    {id: 12, value: "M", points: 4, frequency: 3, row: 2, col: 0},
+    {id: 19, value: "T", points: 1, frequency: 9, row: 2, col: 1},
+    {id: 17, value: "R", points: 1, frequency: 6, row: 2, col: 2},
+    {id: 14, value: "O", points: 1, frequency: 8, row: 2, col: 3},
+    {id: 7, value: "H", points: 3, frequency: 7, row: 3, col: 0},
+    {id: 4, value: "E", points: 1, frequency: 15, row: 3, col: 1},
+    {id: 2, value: "C", points: 4, frequency: 5, row: 3, col: 2},
+    {id: 11, value: "L", points: 3, frequency: 4, row: 3, col: 3}],
   powers: [
     {
       id: 1,

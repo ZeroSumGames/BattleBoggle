@@ -23,4 +23,4 @@ export function subscribeToBoard (callback) {
 	socket.on('makeBoard', (board) => {
 		callback(board);
 	})
-} 
+}
