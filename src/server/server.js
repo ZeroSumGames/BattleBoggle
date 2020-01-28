@@ -52,7 +52,7 @@ function makeBoard(letters) {
 let board = makeBoard(allLetters);
 
 
-server.listen(process.env.PORT || 2999, () => {
+server.listen(Number(process.env.PORT)-1 || 2999, () => {
 	if(process.env.PORT) console.log(`Serving on port ${process.env.PORT}`)
 	else console.log("Couldn't find process.env.port...started serving on port 3000")
 })
