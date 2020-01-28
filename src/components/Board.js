@@ -67,7 +67,8 @@ class Board extends React.Component {
     let validate = this.validateWord(this.props.word);
 
     if (validate.res) {
-      await this.props.addP1Score(this.props.wordScore);
+
+      await this.props.addP1Score(this.props.wordScore + Math.max(this.props.word.length - 3, 0));
       this.props.addFoundWord(validate.wordStringVal);
     }
     this.props.clearWord();
