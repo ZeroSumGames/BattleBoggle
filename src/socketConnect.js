@@ -1,5 +1,7 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('https://secure-tundra-45786.herokuapp.com:19739'); //
+const socket = openSocket('http://secure-tundra-45786.herokuapp.com:19739'); //
+
+console.log('Connected!')
 
 export function subscribeToTimer(callback) {
 	socket.on('timer', timestamp => callback(null, timestamp));
